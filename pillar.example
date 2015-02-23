@@ -1,0 +1,17 @@
+squid:
+  cache_mgr_user: username
+  cache_mgr_password: password
+  src_acl:
+    aclname:
+      - src1
+      - src2
+  post_acl:
+    aclname:
+      - port1
+      - port2
+  deny:
+    - deny1
+    - deny2
+  allow:
+    - allow1
+    - allow2
