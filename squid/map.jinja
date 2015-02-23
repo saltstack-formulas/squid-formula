@@ -1,0 +1,8 @@
+{% set map = salt['grains.filter_by']({
+    'Debian': {
+        'pkgs': ['squid3'],
+        'service': 'squid3',
+        'conf_dir': '/etc/squid3',
+        'conf_file': 'squid.conf',
+    },
+}, grain='os', merge=salt['pillar.get']('squid:lookup')) %}
