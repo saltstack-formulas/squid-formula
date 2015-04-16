@@ -15,3 +15,6 @@ squid:
   allow:
     - allow1
     - allow2
+  extra_configuration: |
+    refresh_pattern bla       0   20% 4320
+    refresh_pattern foo       0   20% 4320
