@@ -5,6 +5,10 @@ squid:
      - 3128
      - 127.0.0.1:8080
 
+  https_port:
+     - 443
+     - 127.0.0.1:443
+
   cache_mgr_user: username
   cache_mgr_password: password
 
