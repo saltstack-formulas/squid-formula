@@ -7,6 +7,9 @@ different values has to be set for other operating systems. This lowers configur
         'conf_dir': '/etc/squid',
         'conf_file': 'squid.conf',
         'cache': '/var/spool/squid',
+        'allowed_src': ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10'],
+        'safe_ports': ['80', '21', '443', '70', '210', '1025-65535', '280', '488', '591', '777'],
+        'http_port': ['3128'],
     },
     'Debian': {
         'pkgs': ['squid3'],
