@@ -1,0 +1,8 @@
+name: default
+title: Default Profile to test Squid
+copyright: Eric Veiras Galisson
+copyright_email: eric[NO_SPAM]sietch-tabr.com
+version: 0.1.0
+supports:
+  - os-name: debian
+
