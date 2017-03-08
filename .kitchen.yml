@@ -1,0 +1,34 @@
+---
+driver:
+  name: vagrant
+  provision: false
+  synced_folders:
+    - ['.kitchen/cache', '/tmp/omnibus', disabled: true]
+
+provisioner:
+  name: salt_solo
+  salt_install: bootstrap
+  formula: squid
+  require_chef: false
+  salt_pillar_root: pillar.example
+  pillars-from-files:
+    squid.sls: pillar.example
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - squid
+  state_top:
+    base:
+      '*':
+        - squid
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: debian/jessie64
+
+suites:
+  - name: default
+
