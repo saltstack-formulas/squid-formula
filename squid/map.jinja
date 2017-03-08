@@ -1,3 +1,5 @@
+{# All default values are defined in the 'Ubuntu' section. It is set as base, therefor only
+different values has to be set for other operating systems. This lowers configuration redundancy. #}
 {% set map = salt['grains.filter_by']({
     'Ubuntu': {
         'pkgs': ['squid'],
@@ -5,19 +7,17 @@
         'conf_dir': '/etc/squid',
         'conf_file': 'squid.conf',
         'cache': '/var/spool/squid',
+        'allowed_src': ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', 'fc00::/7', 'fe80::/10'],
+        'safe_ports': ['80', '21', '443', '70', '210', '1025-65535', '280', '488', '591', '777'],
+        'http_port': ['3128'],
     },
     'Debian': {
         'pkgs': ['squid3'],
         'service': 'squid3',
         'conf_dir': '/etc/squid3',
-        'conf_file': 'squid.conf',
-        'cache': '/var/spool/squid',
     },
     'FreeBSD': {
-        'pkgs': ['squid'],
-        'service': 'squid',
         'conf_dir': '/usr/local/etc/squid',
-        'conf_file': 'squid.conf',
         'cache': '/var/squid/cache',
      },
-}, grain='os', merge=salt['pillar.get']('squid:lookup')) %}
+}, grain='os', merge=salt['pillar.get']('squid:lookup'), base='Ubuntu') %}
