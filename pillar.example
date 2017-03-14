@@ -12,32 +12,52 @@ squid:
   cache_mgr_user: username
   cache_mgr_password: password
 
-  src_acl:
-    src_aclname:
-      - src1
-      - src2
+  # define ACLs here
+  acl:
+    localnet:
+      # optional comment
+      comment: 'authorized clients from localnet'
+      # types are: src, dst, myip, arp... see squid doc for all
+      type: 'src'
+      targets:
+        - 192.168.0.1/32
+        - 172.24.5.0/24
 
-  port_acl:
-    port_aclname:
-      - port1
-      - port2
+    restricted_net:
+      type: 'src'
+      targets:
+        - 192.168.100.0/24
 
-  dst_acl:
-    dst_aclname:
-      - dst1
-      - dst2
+    SSL_ports:
+      type: 'port'
+      targets:
+        - 443
 
-  dstdomain_acl:
-    dstdomain_aclname:
-      - .example.com
-      - .example.org
+    safe_ports:
+      type: 'port'
+      targets:
+        - 80
+        - 21
+        - 3128
+
+    restricted_domains:
+      type: 'dstdomain'
+      targets:
+        - 'mydomain.tld'
+
+    forbidden_domains:
+      type: 'dstdomain'
+      targets:
+        - 'example1.tld'
+        - 'example2.tld'
 
   http_access:
-    - allow src1
-    - deny src2 dstdomain_aclname
+    - allow localnet
+    - deny forbidden_domains
+    - deny restricted_net restricted_domains
     - allow all
 
-  cache_dir: cache_dir ufs /home/squid/cache 1000 16 256
+#  cache_dir: cache_dir ufs /home/squid/cache 1000 16 256
 
   visible_hostname: some.name
 
