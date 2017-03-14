@@ -1,9 +1,12 @@
-# If no configuration is set, a default one is generated
+# If no configuration is set, a default one
+#  (potentially wrong and insecure) is generated
 squid:
+  # listen to HTTP on these ports
   http_port:
      - 3128
      - 127.0.0.1:8080
 
+  # listen to HTTPS on these ports
   https_port:
      - 443
      - 127.0.0.1:443
@@ -20,11 +23,16 @@ squid:
     localnet:
       # optional comment
       comment: 'authorized clients from localnet'
-      # types are: src, dst, myip, arp... see squid doc for all
+      # type comes directly from the squid documentation (src, dst, myip...)
       type: 'src'
       targets:
         - 192.168.0.1/32
         - 172.24.5.0/24
+
+    CONNECT:
+      type: 'method'
+      targets:
+        - CONNECT
 
     restricted_net:
       type: 'src'
@@ -54,13 +62,14 @@ squid:
         - 'example1.tld'
         - 'example2.tld'
 
+  # define access lists here
   http_access:
     - allow localnet
+    - deny CONNECT !SSL_ports
     - deny forbidden_domains
     - deny restricted_net restricted_domains
     - allow all
-
-
+    - deny all  # not set by default so don't forget it
 
 #  cache_dir: cache_dir ufs /home/squid/cache 1000 16 256
 
