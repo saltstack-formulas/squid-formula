@@ -1,7 +1,5 @@
 # If no configuration is set, a default one is generated
 squid:
-  example_rule: True
-
   http_port:
      - 3128
      - 127.0.0.1:8080
