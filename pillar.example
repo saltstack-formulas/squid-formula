@@ -7,10 +7,14 @@ squid:
   https_port:
      - 443
      - 127.0.0.1:443
-
-  cache_mgr_user: username
-  cache_mgr_password: password
-
+ 
+  # configure cache manager
+  cache_manager:
+    email: 'root@mydomain.tld'
+    password: 'mypassword'
+    # creates ACL and allow http_access from localhost
+    defaults: True
+ 
   # define ACLs here
   acl:
     localnet:
@@ -55,6 +59,8 @@ squid:
     - deny forbidden_domains
     - deny restricted_net restricted_domains
     - allow all
+
+
 
 #  cache_dir: cache_dir ufs /home/squid/cache 1000 16 256
 
