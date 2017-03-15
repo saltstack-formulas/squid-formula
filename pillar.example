@@ -50,7 +50,7 @@ squid:
       targets:
         - 80
         - 21
-        - 3128
+        - 443
 
     restricted_domains:
       type: 'dstdomain'
