@@ -63,7 +63,7 @@ squid:
         - 'example1.tld'
         - 'example2.tld'
 
-  # define access lists here
+  # define HTTP access lists here
   http_access:
     - allow localnet
     - deny !Safe_ports
@@ -73,7 +73,9 @@ squid:
     - allow all
     - deny all  # not set by default so don't forget it
 
-#  cache_dir: cache_dir ufs /home/squid/cache 1000 16 256
+  # you can specify several cache_dir, or none will be setup
+  cache_dir:
+    - ufs /var/spool/squid3/cache 1000 16 256
 
   visible_hostname: some.name
 
