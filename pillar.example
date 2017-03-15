@@ -1,19 +1,19 @@
+---
 # If no configuration is set, a default one
 #  (potentially wrong and insecure) is generated
 squid:
   # listen to HTTP on these ports
   http_port:
      - 3128
-     - 127.0.0.1:8080
+     - 8080
 
   # listen to HTTPS on these ports
   https_port:
      - 443
-     - 127.0.0.1:443
  
   # configure cache manager
   cache_manager:
-    email: 'root@mydomain.tld'
+    email: 'root@domain.tld'
     password: 'mypassword'
     # creates ACL and allow http_access from localhost
     # if not set, you need to create the access rules
@@ -28,7 +28,6 @@ squid:
       type: 'src'
       targets:
         - 192.168.0.1/32
-        - 172.24.5.0/24
 
     CONNECT:
       type: 'method'
@@ -49,19 +48,17 @@ squid:
       type: 'port'
       targets:
         - 80
-        - 21
         - 443
 
     restricted_domains:
       type: 'dstdomain'
       targets:
-        - 'mydomain.tld'
+        - 'restricted_domain.tld'
 
     forbidden_domains:
       type: 'dstdomain'
       targets:
-        - 'example1.tld'
-        - 'example2.tld'
+        - 'forbidden_domain.tld'
 
   # define HTTP access lists here
   http_access:
