@@ -74,8 +74,14 @@ squid:
   cache_dir:
     - ufs /var/spool/squid3/cache 1000 16 256
 
+  # default refresh patterns are set with this configuration
+  #refresh_pattern: defaults
+  # or define your own
+  refresh_pattern:
+    - '.            0       20%     4320'
+
   visible_hostname: some.name
 
-  extra_configuration: |
-    refresh_pattern bla       0   20% 4320
-    refresh_pattern foo       0   20% 4320
+#  extra_configuration: |
+#    refresh_pattern bla       0   20% 4320
+#    refresh_pattern foo       0   20% 4320

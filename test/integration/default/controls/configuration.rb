@@ -30,7 +30,9 @@ describe file('/etc/squid3/squid.conf') do
     its('content') { should match 'acl manager url_regex' }
     its('content') { should match 'http_access allow localhost manager' }
     its('content') { should match 'http_access deny manager' }
+
+    # refresh patterns
+    its('content') { should match 'refresh_pattern .            0       20%     4320' }
+
 end
-
-
 
