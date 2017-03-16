@@ -34,5 +34,7 @@ describe file('/etc/squid3/squid.conf') do
     # refresh patterns
     its('content') { should match 'refresh_pattern .            0       20%     4320' }
 
+    # hostname
+    its('content') { should match 'visible_hostname some.name' }
 end
 

@@ -80,6 +80,7 @@ squid:
   refresh_pattern:
     - '.            0       20%     4320'
 
+  # define the visible hostname of Squid, else the minion ID will be used
   visible_hostname: some.name
 
 #  extra_configuration: |
