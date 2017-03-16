@@ -71,8 +71,8 @@ squid:
     - deny all  # not set by default so don't forget it
 
   # you can specify several cache_dir, or none will be setup
-  cache_dir:
-    - ufs /var/spool/squid3/cache 1000 16 256
+  #cache_dir:
+  #  - ufs /var/spool/squid3/cache 1000 16 256
 
   # default refresh patterns are set with this configuration
   #refresh_pattern: defaults
@@ -83,6 +83,6 @@ squid:
   # define the visible hostname of Squid, else the minion ID will be used
   visible_hostname: some.name
 
-#  extra_configuration: |
-#    refresh_pattern bla       0   20% 4320
-#    refresh_pattern foo       0   20% 4320
+  extra_configuration:
+    - 'cache_peer_domain parent.foo.net        .edu'
+
