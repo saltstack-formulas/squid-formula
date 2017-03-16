@@ -26,7 +26,7 @@ describe file('/etc/squid3/squid.conf') do
 
     # verify cache manager
     its('content') { should match 'cache_mgr root@domain.tld' }
-    its('content') { should match 'cachemgr_password mypassword' }
+    its('content') { should match 'cachemgr_passwd mypassword' }
     its('content') { should match 'acl manager url_regex' }
     its('content') { should match 'http_access allow localhost manager' }
     its('content') { should match 'http_access deny manager' }
