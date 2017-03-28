@@ -36,5 +36,12 @@ describe file('/etc/squid3/squid.conf') do
 
     # hostname
     its('content') { should match 'visible_hostname some.name' }
+
+    # cache_peer and cache_peer_access
+    its('content') { should match 'cache_peer 192.168.100.1 parent 80 0 no-query originserver name=cache1' }
+    its('content') { should match 'cache_peer_access cache1 allow localnet' }
+
+    # extra configuration
+    its('content') { should match 'cache_peer_domain parent.foo.net        .edu' }
 end
 
