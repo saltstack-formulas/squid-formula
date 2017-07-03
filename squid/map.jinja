@@ -1,23 +1,22 @@
-{% set map = salt['grains.filter_by']({
-    'Ubuntu': {
-        'pkgs': ['squid'],
-        'service': 'squid',
-        'conf_dir': '/etc/squid',
-        'conf_file': 'squid.conf',
-        'cache': '/var/spool/squid',
-    },
-    'Debian': {
-        'pkgs': ['squid3'],
-        'service': 'squid3',
-        'conf_dir': '/etc/squid3',
-        'conf_file': 'squid.conf',
-        'cache': '/var/spool/squid',
-    },
-    'FreeBSD': {
-        'pkgs': ['squid'],
-        'service': 'squid',
-        'conf_dir': '/usr/local/etc/squid',
-        'conf_file': 'squid.conf',
-        'cache': '/var/squid/cache',
-     },
-}, grain='os', merge=salt['pillar.get']('squid:lookup')) %}
+{% import_yaml "squid/defaults.yaml" as defaults %}
+{% import_yaml "squid/osmap.yaml" as osmap %}
+{% import_yaml "squid/codenamemap.yaml" as codemap %}
+
+{# get the settings for the os_family grain #}
+{% set osfam = salt['grains.filter_by'](osmap, grain='os_family') or {} %}
+{# get the settings for the oscodename grain, os_family data will override
+    oscodename data #}
+{% set oscode = salt['grains.filter_by'](codemap,
+                                         grain='oscodename',
+                                         merge=osfam) or {} %}
+
+{# merge the os family/codename specific data over the defaults #}
+{% do defaults.squid.update(oscode) %}
+
+{# merge the pillar:lookup dict into the defaults/os specific dict #}
+{% set lookup = salt['pillar.get']('squid:lookup',
+                                   default=defaults.squid,
+                                   merge=True) %}
+
+{# merge the actual squid pillar into the above combined dict #}
+{% set map = salt['pillar.get']('squid', default=lookup, merge=True) %}
