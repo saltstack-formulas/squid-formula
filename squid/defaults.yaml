@@ -1,0 +1,7 @@
+squid:
+  pkgs:
+    - squid
+  service: squid
+  conf_dir: /etc/squid
+  conf_file: squid.conf
+  cache: /var/spool/squid

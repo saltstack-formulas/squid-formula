@@ -1,0 +1,3 @@
+FreeBSD:
+  conf_dir: /usr/local/etc/squid
+  cache: /var/squid/cache
