@@ -5,11 +5,12 @@ squid:
   # listen to HTTP on these ports
   http_port:
      - 3128
-     - 8080
+     - 127.0.0.1:8080
 
   # listen to HTTPS on these ports
   https_port:
      - 443
+     - 127.0.0.1:443
  
   # configure cache manager
   cache_manager:
