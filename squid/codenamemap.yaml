@@ -1,0 +1,7 @@
+# Debian
+jessie:
+  pkgs:
+    - squid3
+  service: squid3
+  conf_dir: /etc/squid3
+  cache: /var/spool/squid3
