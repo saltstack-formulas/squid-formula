@@ -1,0 +1,9 @@
+{%- macro squid_directive(key, value) %}
+  {%- if value is sequence and value is not string %}
+    {%- for val in value %}
+{{ key }} {{ val }}
+    {%- endfor %}
+  {%- else %}
+{{ key }} {{ value }}
+  {%- endif %}
+{%- endmacro %}
