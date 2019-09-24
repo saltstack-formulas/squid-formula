@@ -19,7 +19,11 @@ squid:
     # creates ACL and allow http_access from localhost
     # if not set, you need to create the access rules
     defaults: True
- 
+  # configure auth params
+  auth_params:
+    basic:
+      program: '/usr/lib64/squid/basic_ncsa_auth /etc/squid/passwords'
+      realm: '"Proxy Server Message"'
   # define ACLs here
   acl:
     localnet:
@@ -60,6 +64,10 @@ squid:
       type: 'dstdomain'
       targets:
         - 'forbidden_domain.tld'
+    authenticated:
+      type: proxy_auth
+      targets:
+        - 'REQUIRED'
 
   # define HTTP access lists here
   http_access:
@@ -68,7 +76,7 @@ squid:
     - deny CONNECT !SSL_ports
     - deny forbidden_domains
     - deny restricted_net restricted_domains
-    - allow all
+    - allow authenticated
     - deny all  # not set by default so don't forget it
 
   # you can specify several cache_dir, or none will be setup
