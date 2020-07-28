@@ -37,7 +37,7 @@ GEM
       thor (~> 0.19)
       toml (~> 0.1)
       train (>= 0.22.0, < 1.0)
-    json (2.0.3)
+    json (2.3.1)
     kitchen-inspec (0.17.0)
       hashie (~> 3.4)
       inspec (>= 0.34.0, < 2.0.0)
